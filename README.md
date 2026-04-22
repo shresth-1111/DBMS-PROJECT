@@ -25,6 +25,7 @@ SESSION_SECRET=your_secret_key{Use mine}
 Set up the database in MySQL:
 ```sql
 CREATE DATABASE library_db;
+Run seed.js for filling database.
 ```
 
 (Start MySQL server before this step)
