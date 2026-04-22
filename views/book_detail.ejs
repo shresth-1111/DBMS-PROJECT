@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+<div class="card">
+    <div class="flex-between">
+        <h2>Book Details</h2>
+        <% if (admin) { %>
+            <div style="display: flex; gap: 10px;">
+                <a href="/books/<%= book.book_id %>/edit" class="btn btn-primary">Edit</a>
+                <form action="/books/<%= book.book_id %>/delete" method="POST" onsubmit="return confirm('Delete this book?');">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+        <div>
+            <p><strong>Title:</strong> <%= book.book_name %></p>
+            <p><strong>Author:</strong> <%= book.author %></p>
+            <p><strong>Category:</strong> <%= book.category_name || 'N/A' %></p>
+            <p><strong>Shelf Number:</strong> <%= book.shelf_number %></p>
+        </div>
+        <div>
+            <p><strong>Total Copies:</strong> <%= book.total_copies %></p>
+            <p><strong>Available Copies:</strong> 
+                <span class="badge <%= book.available_copies > 0 ? 'badge-success' : 'badge-danger' %>">
+                    <%= book.available_copies %>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<h3>Issue History</h3>
+<% if (issues.length > 0) { %>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue ID</th>
+                    <th>Student</th>
+                    <th>Issue Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% issues.forEach(issue => { %>
+                    <tr>
+                        <td>#<%= issue.issue_id %></td>
+                        <td><a href="/students/<%= issue.student_id %>"><%= issue.student_name %></a></td>
+                        <td><%= new Date(issue.issue_date).toLocaleDateString() %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } else { %>
+    <p>No issue logs found for this book.</p>
+<% } %>
+
+<%- include('partials/footer') %>

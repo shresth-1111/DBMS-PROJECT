@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<div class="flex-between">
+    <h1>All Issue Logs</h1>
+</div>
+
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Issue ID</th>
+                <th>Book Details</th>
+                <th>Student Details</th>
+                <th>Issue Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% issues.forEach(issue => { %>
+                <tr>
+                    <td>#<%= issue.issue_id %></td>
+                    <td>
+                        <a href="/books/<%= issue.book_id %>" style="font-weight: 600;"><%= issue.book_name %></a>
+                        <br><small style="color: var(--text-light)">ID: <%= issue.book_id %></small>
+                    </td>
+                    <td>
+                        <a href="/students/<%= issue.student_id %>" style="font-weight: 600;"><%= issue.student_name %></a>
+                        <br><small style="color: var(--text-light)">ID: <%= issue.student_id %></small>
+                    </td>
+                    <td>
+                        <span class="badge badge-danger">
+                            <%= new Date(issue.issue_date).toLocaleDateString() %>
+                        </span>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<div class="card">
+    <div class="flex-between">
+        <h2>Student Details</h2>
+        <% if (admin) { %>
+            <div style="display: flex; gap: 10px;">
+                <a href="/students/<%= student.student_id %>/edit" class="btn btn-primary">Edit</a>
+                <form action="/students/<%= student.student_id %>/delete" method="POST" onsubmit="return confirm('Delete this student?');">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+    
+    <div>
+        <p><strong>Name:</strong> <%= student.name %></p>
+        <p><strong>Age:</strong> <%= student.age %></p>
+    </div>
+</div>
+
+<h3>Issue History</h3>
+<% if (issues.length > 0) { %>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue ID</th>
+                    <th>Book</th>
+                    <th>Issue Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% issues.forEach(issue => { %>
+                    <tr>
+                        <td>#<%= issue.issue_id %></td>
+                        <td><a href="/books/<%= issue.book_id %>"><%= issue.book_name %></a></td>
+                        <td><%= new Date(issue.issue_date).toLocaleDateString() %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } else { %>
+    <p>No issue logs found for this student.</p>
+<% } %>
+
+<%- include('partials/footer') %>

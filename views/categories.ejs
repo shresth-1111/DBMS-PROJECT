@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<div class="flex-between">
+    <h1>Library Categories</h1>
+</div>
+
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Books Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach(category => { %>
+                <tr>
+                    <td>#<%= category.category_id %></td>
+                    <td><a href="/categories/<%= category.category_id %>" style="font-weight: 600;"><%= category.category_name %></a></td>
+                    <td>
+                        <span class="badge badge-success"><%= category.book_count %> Books</span>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+<div class="flex-between">
+    <h1>Dashboard Analytics</h1>
+</div>
+
+<div class="stat-grid">
+    <a href="/books" class="card stat-card">
+        <h3>Total Books</h3>
+        <div class="number"><%= bookCount %></div>
+    </a>
+    <a href="/students" class="card stat-card">
+        <h3>Registered Students</h3>
+        <div class="number"><%= studentCount %></div>
+    </a>
+    <a href="/categories" class="card stat-card">
+        <h3>Categories</h3>
+        <div class="number"><%= categoryCount %></div>
+    </a>
+</div>
+
+<%- include('partials/footer') %>

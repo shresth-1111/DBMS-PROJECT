@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+<div class="flex-between">
+    <h1>Library Books</h1>
+    <% if (admin) { %>
+        <a href="/books/new" class="btn btn-primary">+ Add New Book</a>
+    <% } %>
+</div>
+
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Shelf</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% books.forEach(book => { %>
+                <tr>
+                    <td><a href="/books/<%= book.book_id %>">#<%= book.book_id %></a></td>
+                    <td style="font-weight: 500;"><%= book.book_name %></td>
+                    <td><%= book.author %></td>
+                    <td><%= book.category_name || 'N/A' %></td>
+                    <td><%= book.shelf_number %></td>
+                    <td>
+                        <span class="badge <%= book.available_copies > 0 ? 'badge-success' : 'badge-danger' %>">
+                            <%= book.available_copies %> / <%= book.total_copies %>
+                        </span>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('partials/footer') %>
